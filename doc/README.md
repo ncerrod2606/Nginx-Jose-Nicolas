@@ -5,10 +5,10 @@
 
 ## Índice
 1. [Creación de la máquina virtual ](#creacion-de-la-maquina-virtual)
-2. [Instalacion de Nginx](#instalacion-de-nginx)
+2. [Instalación de Nginx](#instalacion-de-nginx)
 3. [Clonación del repositorio para la web](#clonacion-del-repositorio-para-la-web)
-4. [Configuracion del archivo jose-nico.test](#configuracion-del-archivo-jose-nico-test)
-5. [Configuracion del archivo /etc/hosts](#configuracion-del-archivo-etc-hosts)
+4. [Configuracion del archivo jose-nico.test](#configuracion-del-primer-archivo)
+5. [Configuracion del archivo /etc/hosts](#configuracion-del-segundo-archivo)
 6. [Comprobacion de la configuracion de Nginx por nuestra IP](#comprobacion-de-la-configuracion-de-nginx-por-nuestra-ip)
 7. [Comprobacion de la configuracion de Nginx por nuestro dominio](#comprobacion-de-la-configuracion-de-nginx-por-nuestro-dominio)
 8. [Visualizacion de los accesos a Nginx](#visualizacion-de-los-accesos-a-nginx)
@@ -31,7 +31,7 @@ systemctl status nginx
 
 ![instalacion-nginx](./img/cp2.png)
 
-## Clonación del repositorio para la web
+## Clonacion del repositorio para la web
 
 Nos movemos a la carpeta /var/www/jose-nico.test/html y posterior a esto clonamos el repositorio para la web con el comando
 ```
@@ -42,13 +42,16 @@ Donde el repositorio se clonara en la carpeta **/var/www/jose-nico.test/html**
 
 ![clonacion-repositorio](./img/cp3.png)
 
-## Configuracion del archivo jose-nico.test
+## Configuracion del primer archivo
+# **jose-nico.test**
 
 Configuramos el archivo jose-nico.test en la carpeta /etc/nginx/sites-available
 
 ![configuracion-archivo](./img/cp4.png)
 
-## Configuracion del archivo /etc/hosts
+## Configuracion del segundo archivo 
+
+# **/etc/hosts**
 
 Configuramos el archivo /etc/hosts en nuestra máquina principal para la web jose-nico.test con la IP de la máquina virtual 192.168.125.16 
 
@@ -67,7 +70,7 @@ Comprobamos la configuracion de Nginx por nuestro dominio poniendo en nuestra UR
 ![comprobacion-configuracion-dom](./img/cp7.png)
 
 
-## Visualización de los accesos a Nginx
+## Visualizacion de los accesos a Nginx
 
 Visualizamos los accesos a Nginx con el comando
 ```
@@ -77,7 +80,7 @@ cat /var/log/nginx/access.log
 ![visualizacion-accesos](./img/cp8.png)
 
 
-## Visualización de errores de Nginx
+## Visualizacion de errores de Nginx
 
 Visualizamos los errores de Nginx con el comando
 ```
