@@ -4,96 +4,88 @@
 </p>
 
 ## Índice
-1. [Creación de la máquina virtual ](#creacion-de-la-maquina-virtual)
-2. [Instalación de Nginx](#instalacion-de-nginx)
-3. [Clonación del repositorio para la web](#clonacion-del-repositorio-para-la-web)
-4. [Configuracion del archivo jose-nico.test](#configuracion-del-primer-archivo)
-5. [Configuracion del archivo /etc/hosts](#configuracion-del-segundo-archivo)
-6. [Comprobacion de la configuracion de Nginx por nuestra IP](#comprobacion-de-la-configuracion-de-nginx-por-nuestra-ip)
-7. [Comprobacion de la configuracion de Nginx por nuestro dominio](#comprobacion-de-la-configuracion-de-nginx-por-nuestro-dominio)
-8. [Visualizacion de los accesos a Nginx](#visualizacion-de-los-accesos-a-nginx)
-9. [Visualizacion de errores de Nginx](#visualizacion-de-errores-de-nginx)
+
+1. [Paquetes necesarios](#paquetes-necesarios)
+2. [Creación de usuarios y contraseñas para el acceso web](#creacion-de-usuarios-y-contraseñas-para-el-acceso-web)
+3. [Configurando el servidor Nginx para usar autenticación básica](#configurando-el-servidor-nginx-para-usar-autenticacion-básica)
+4. [Probando la nueva configuración](#probando-la-nueva-configuración)
+5. [Tareas](#tareas)
+6. [T.1](#t1)
+7. [T.2](#t2)
+8. [Combinación de autenticación básica y restricción por IP](#combinación-de-la-autenticación-básica-con-la-restricción-de-acceso-por-ip)
+9. [Tarea 1](#tarea-1)
+10. [Tarea 2](#tarea-2)
+
 
 ---
 
-## Creacion de la maquina virtual 
+## Paquetes necesarios 
 
-Creamos la máquina virtual con nuestra IP de máquina virtual 192.168.125.16 una vez realizado esto haremos un **vagrant up** para iniciar la máquina virtual y una vez iniciada la máquina virtual haremos un **vagrant ssh** para conectarnos a la máquina virtual
-
-![creacion-maquina](./img/cp1.png)
-
-## Instalacion de Nginx
-
-Instalamos Nginx y una vez instalado comprobamos su estado con el comando
+Instalamos los paquetes necesarios con el comando
 ```
-systemctl status nginx
+dpkg -l | grep openssl
 ```
 
-![instalacion-nginx](./img/cp2.png)
+![paquetes-necesarios](./img/cp1.png)
 
-## Clonacion del repositorio para la web
-
-Nos movemos a la carpeta /var/www/jose-nico.test/html y posterior a esto clonamos el repositorio para la web con el comando
+Si no lo tuvieramos instalado, lo instalamos con el comando
 ```
-git clone https://github.com/cloudacademy/static-website-example
+sudo apt install openssl -y
 ```
 
-Donde el repositorio se clonara en la carpeta **/var/www/jose-nico.test/html**
+## Creacion de usuarios y contraseñas para el acceso web
 
-![clonacion-repositorio](./img/cp3.png)
+Crearemos un archivo oculto llamado .htpasswd en el directorio de configuración /etc/nginx donde
+guardar nuestros dos usuarios y contraseñas en mi caso:
 
-## Configuracion del primer archivo
-# **jose-nico.test**
-
-Configuramos el archivo jose-nico.test en la carpeta /etc/nginx/sites-available
-
-![configuracion-archivo](./img/cp4.png)
-
-## Configuracion del segundo archivo 
-
-# **/etc/hosts**
-
-Configuramos el archivo /etc/hosts en nuestra máquina principal para la web jose-nico.test con la IP de la máquina virtual 192.168.125.16 
-
-![configuracion-archivo-hosts](./img/cp5.png)
-
-## Comprobacion de la configuracion de Nginx por nuestra IP
-
-Comprobamos la configuracion de Nginx por nuestra IP poniendo en nuestra URL la IP de la máquina virtual 192.168.125.16
-
-![comprobacion-configuracion](./img/cp6.png)
-
-## Comprobacion de la configuracion de Nginx por nuestro dominio
-
-Comprobamos la configuracion de Nginx por nuestro dominio poniendo en nuestra URL el dominio jose-nico.test
-
-![comprobacion-configuracion-dom](./img/cp7.png)
-
-
-## Visualizacion de los accesos a Nginx
-
-Visualizamos los accesos a Nginx con el comando
 ```
-cat /var/log/nginx/access.log
+sudo sh -c "echo -n 'nicolas:' >> /etc/nginx/.htpasswd"
+sudo sh -c "echo -n 'cervera:' >> /etc/nginx/.htpasswd"
 ```
 
-![visualizacion-accesos](./img/cp8.png)
+![creacion-usuarios](./img/cp2.png)
 
-
-## Visualizacion de errores de Nginx
-
-Visualizamos los errores de Nginx con el comando
+Ahora crearemos un pasword cifrado para el usuario de forma interactiva que es el utilizado por mi caso:
 ```
-cat /var/log/nginx/error.log
+sudo sh -c "openssl passwd -apr1 >> /etc/nginx/.htpasswd"
+```
+o de forma no interactiva:
+
+```
+sudo sh -c "openssl passwd -apr1 'aqui_iria_la_contraseña'>> /etc/nginx/.htpasswd"
 ```
 
-![visualizacion-errores](./img/cp9.png)
+Para comprobar que el usuario y la contraseña aparecen cifrados en el fichero:
 
+```
+cat /etc/nginx/.htpasswd
+```
 
+![creacion-usuarios-comprobacion](./img/cp3.png)
 
+## Configurando el servidor Nginx para usar autenticacion básica
 
+Accederemos al archivo de nuestra configuración de nginx con el comando:
+```
+sudo nano /etc/nginx/sites-available/jose-nico.test
+```
+donde realizaremos la configuración de autenticación básica.
 
+![configuracion-autenticacion](./img/cp4.png)
 
+Ahora reiniciaremos el servidor nginx con el comando:
+```
+sudo systemctl restart nginx
+```
+![reiniciar-nginx](./img/cp5.png)
+
+Y la comprobacion de la autenticación básica nos iriamos a la url http://jose-nico.test y se pediria la autenticacion:
+
+![comprobacion-autenticacion](./img/cp6.png)
+
+donde introducimos el usuario y la contraseña.
+
+![comprobacion-autenticacion2](./img/cp7.png)
 
 
 
