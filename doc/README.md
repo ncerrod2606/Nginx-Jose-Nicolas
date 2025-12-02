@@ -1,4 +1,5 @@
 ﻿# Configuración de un servidor FTP
+
 <p align="left">
 <img src="https://img.shields.io/badge/STATUS-FINALIZADO-blue">
 </p>
@@ -16,12 +17,12 @@
 9. [Tarea 1](#tarea-1)
 10. [Tarea 2](#tarea-2)
 
-
 ---
 
-## Paquetes necesarios 
+## Paquetes necesarios
 
 Instalamos los paquetes necesarios con el comando
+
 ```
 dpkg -l | grep openssl
 ```
@@ -29,6 +30,7 @@ dpkg -l | grep openssl
 ![paquetes-necesarios](./img/cp1.png)
 
 Si no lo tuvieramos instalado, lo instalamos con el comando
+
 ```
 sudo apt install openssl -y
 ```
@@ -46,9 +48,11 @@ sudo sh -c "echo -n 'cervera:' >> /etc/nginx/.htpasswd"
 ![creacion-usuarios](./img/cp2.png)
 
 Ahora crearemos un pasword cifrado para el usuario de forma interactiva que es el utilizado por mi caso:
+
 ```
 sudo sh -c "openssl passwd -apr1 >> /etc/nginx/.htpasswd"
 ```
+
 o de forma no interactiva:
 
 ```
@@ -66,18 +70,24 @@ cat /etc/nginx/.htpasswd
 ## Configurando el servidor Nginx para usar autenticacion básica
 
 Accederemos al archivo de nuestra configuración de nginx con el comando:
+
 ```
 sudo nano /etc/nginx/sites-available/jose-nico.test
 ```
+
 donde realizaremos la configuración de autenticación básica.
 
 ![configuracion-autenticacion](./img/cp4.png)
 
 Ahora reiniciaremos el servidor nginx con el comando:
+
 ```
 sudo systemctl restart nginx
 ```
+
 ![reiniciar-nginx](./img/cp5.png)
+
+## Probando la nueva configuración
 
 Y la comprobacion de la autenticación básica nos iriamos a la url http://jose-nico.test y se pediria la autenticacion:
 
@@ -99,6 +109,8 @@ Donde al introducir el usuario y la contraseña correctamente se mostraria la pa
 
 ![comprobacion-autenticacion5](./img/cp10.png)
 
+
+
 Si decimos cancelar el inicio de sesion nos saldria la pagina web de error 401 Authorization Required.
 
 ![comprobacion-autenticacion6](./img/cp11.png)
@@ -107,6 +119,10 @@ Y cuando lo comprobamos en el archivo access.log nos saldria el siguiente mensaj
 
 ![comprobacion-autenticacion7](./img/cp12.png)
 
+## Tareas
+
+### T.1
+
 Sin embargo si introducimos mal el usuario o la contraseña saldria el siguiente mensaje en el archivo access.log:
 
 ![comprobacion-autenticacion8](./img/cp13.png)
@@ -114,6 +130,9 @@ Sin embargo si introducimos mal el usuario o la contraseña saldria el siguiente
 Cuando introducimos correctamente el usuario y la contraseña saldria el siguiente mensaje en el archivo access.log en este caso el usuario cervera:
 
 ![comprobacion-autenticacion9](./img/cp14.png)
+
+### T.2
+
 
 Configuraremos ahora la restriccion de acceso en /contact.html añadiendole la autenticacion básica a un nuevo location.
 Borraremos las dos líneas que hacen referencia a la autenticación básica en el location del directorio raíz.
@@ -125,7 +144,6 @@ Tras cambiar el archivo de configuracion de nginx para que ahora la restriccion 
 Por lo tanto se comprobaria la autenticacion basic en la url http://jose-nico.test/contact.html
 
 ![comprobacion-restriccion](./img/cp16.png)
-
 
 Ahora entrariamos con el usuario nicolas y la contraseña para este usuario.
 
@@ -140,6 +158,10 @@ Y posterior a esto se mostraria la pagina web.
 ![comprobacion-restriccion4](./img/cp19.png)
 
 
+## Combinación de autenticación básica y restricción por IP
+
+### Tarea 1
+
 Ahora pasaremos a restringir el acceso por ip.
 
 Donde bloquearemos el acceso a la ip 192.168.125.1 que es la ip de mi maquina virtual para que no pueda acceder a la pagina web desde la raiz.
@@ -147,9 +169,11 @@ Donde bloquearemos el acceso a la ip 192.168.125.1 que es la ip de mi maquina vi
 ![configuracion-restriccion](./img/cp20.png)
 
 Ejecutaremos el comando:
+
 ```
 sudo systemctl restart nginx
 ```
+
 Y así se reiniciaria el servidor nginx para que se aplicara la nueva configuracion.
 
 Y ahora al intentar acceder a la pagina web desde la ip 192.168.125.1 nos saldria la pagina web de error 403 Forbidden.
@@ -160,20 +184,23 @@ Donde en el archivo error.log nos saldria el siguiente mensaje:
 
 ![comprobacion-restriccion6](./img/cp22.png)
 
+### Tarea 2
+
 Ahora para que desde tu máquina anfitriona se tenga que tener tanto una IP válida como un usuario válido, ambas cosas a la vez, se tendría que hacer lo siguiente:
 
 ![configuracion-restriccion](./img/cp23.png)
 
 Para que se cargue esta configuracion se tendría que reiniciar el servidor nginx con el comando:
+
 ```
 sudo systemctl restart nginx
 ```
+
 Y así se reiniciaria el servidor nginx para que se aplicara la nueva configuracion.
 
 Y ahora al intentar acceder a la pagina web desde la ip 192.168.125.1 nos saldria lo siguiente:
 
 ![comprobacion-restriccion7](./img/cp24.png)
-
 
 Introducimos el usuario nicolas y la contraseña para este usuario.
 
@@ -183,7 +210,7 @@ Y efectivamente se mostraria la pagina web.
 
 ![comprobacion-restriccion9](./img/cp26.png)
 
+En el archivo access.log nos saldria el siguiente mensaje:
 
-
-
+![comprobacion-restriccion10](./img/cp27.png)
 
