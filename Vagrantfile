@@ -11,6 +11,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.network "private_network", ip: "192.168.125.16"
 
-  config.vm.synced_folder "C:\\Users\\FX506\\Downloads\\perfect-html-education\\html", "/var/www/jose-nico.test/html/static-website-example"
+  config.vm.synced_folder "C:\\Users\\FX506\\Downloads\\perfect-html-education\\html",
+                          "/var/www/jose-nico.test/html/static-website-example"
 
+  config.vm.provision "shell", path: "provision.sh"
 end
+
