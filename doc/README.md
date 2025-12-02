@@ -127,6 +127,61 @@ Por lo tanto se comprobaria la autenticacion basic en la url http://jose-nico.te
 ![comprobacion-restriccion](./img/cp16.png)
 
 
+Ahora entrariamos con el usuario nicolas y la contraseña para este usuario.
+
+![comprobacion-restriccion2](./img/cp17.png)
+
+Comprobacion de la autenticacion basic en la ruta /contact.html en el archivo access.log:
+
+![comprobacion-restriccion3](./img/cp18.png)
+
+Y posterior a esto se mostraria la pagina web.
+
+![comprobacion-restriccion4](./img/cp19.png)
+
+
+Ahora pasaremos a restringir el acceso por ip.
+
+Donde bloquearemos el acceso a la ip 192.168.125.1 que es la ip de mi maquina virtual para que no pueda acceder a la pagina web desde la raiz.
+
+![configuracion-restriccion](./img/cp20.png)
+
+Ejecutaremos el comando:
+```
+sudo systemctl restart nginx
+```
+Y así se reiniciaria el servidor nginx para que se aplicara la nueva configuracion.
+
+Y ahora al intentar acceder a la pagina web desde la ip 192.168.125.1 nos saldria la pagina web de error 403 Forbidden.
+
+![comprobacion-restriccion5](./img/cp21.png)
+
+Donde en el archivo error.log nos saldria el siguiente mensaje:
+
+![comprobacion-restriccion6](./img/cp22.png)
+
+Ahora para que desde tu máquina anfitriona se tenga que tener tanto una IP válida como un usuario válido, ambas cosas a la vez, se tendría que hacer lo siguiente:
+
+![configuracion-restriccion](./img/cp23.png)
+
+Para que se cargue esta configuracion se tendría que reiniciar el servidor nginx con el comando:
+```
+sudo systemctl restart nginx
+```
+Y así se reiniciaria el servidor nginx para que se aplicara la nueva configuracion.
+
+Y ahora al intentar acceder a la pagina web desde la ip 192.168.125.1 nos saldria lo siguiente:
+
+![comprobacion-restriccion7](./img/cp24.png)
+
+
+Introducimos el usuario nicolas y la contraseña para este usuario.
+
+![comprobacion-restriccion8](./img/cp25.png)
+
+Y efectivamente se mostraria la pagina web.
+
+![comprobacion-restriccion9](./img/cp26.png)
 
 
 
