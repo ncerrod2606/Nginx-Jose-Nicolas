@@ -87,6 +87,19 @@ donde introducimos el usuario y la contraseña.
 
 ![comprobacion-autenticacion2](./img/cp7.png)
 
+donde al introducir el usuario y la contraseña correctamente se mostraria la pagina web.
+
+![comprobacion-autenticacion3](./img/cp8.png)
+
+Y lo mismo para el usuario cervera.
+
+![comprobacion-autenticacion4](./img/cp9.png)
+
+donde al introducir el usuario y la contraseña correctamente se mostraria la pagina web.
+
+![comprobacion-autenticacion5](./img/cp10.png)
+
+
 
 
 
