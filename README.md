@@ -1,4 +1,4 @@
-# Nginx I: Instalación y configuración de servidor web
+# Nginx II: Autenticación
 
 Realizado por José Manuel Aranda Castro y Nicolás Cervera Rodríguez
 

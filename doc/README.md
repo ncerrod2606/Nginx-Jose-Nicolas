@@ -83,11 +83,11 @@ Y la comprobacion de la autenticación básica nos iriamos a la url http://jose-
 
 ![comprobacion-autenticacion](./img/cp6.png)
 
-donde introducimos el usuario y la contraseña.
+Donde introducimos el usuario y la contraseña.
 
 ![comprobacion-autenticacion2](./img/cp7.png)
 
-donde al introducir el usuario y la contraseña correctamente se mostraria la pagina web.
+Donde al introducir el usuario y la contraseña correctamente se mostraria la pagina web.
 
 ![comprobacion-autenticacion3](./img/cp8.png)
 
@@ -95,9 +95,38 @@ Y lo mismo para el usuario cervera.
 
 ![comprobacion-autenticacion4](./img/cp9.png)
 
-donde al introducir el usuario y la contraseña correctamente se mostraria la pagina web.
+Donde al introducir el usuario y la contraseña correctamente se mostraria la pagina web.
 
 ![comprobacion-autenticacion5](./img/cp10.png)
+
+Si decimos cancelar el inicio de sesion nos saldria la pagina web de error 401 Authorization Required.
+
+![comprobacion-autenticacion6](./img/cp11.png)
+
+Y cuando lo comprobamos en el archivo access.log nos saldria el siguiente mensaje:
+
+![comprobacion-autenticacion7](./img/cp12.png)
+
+Sin embargo si introducimos mal el usuario o la contraseña saldria el siguiente mensaje en el archivo access.log:
+
+![comprobacion-autenticacion8](./img/cp13.png)
+
+Cuando introducimos correctamente el usuario y la contraseña saldria el siguiente mensaje en el archivo access.log en este caso el usuario cervera:
+
+![comprobacion-autenticacion9](./img/cp14.png)
+
+Configuraremos ahora la restriccion de acceso en /contact.html añadiendole la autenticacion básica a un nuevo location.
+Borraremos las dos líneas que hacen referencia a la autenticación básica en el location del directorio raíz.
+
+![configuracion-restriccion](./img/cp15.png)
+
+Tras cambiar el archivo de configuracion de nginx para que ahora la restriccion de acceso se haga en /contact.html
+
+Por lo tanto se comprobaria la autenticacion basic en la url http://jose-nico.test/contact.html
+
+![comprobacion-restriccion](./img/cp16.png)
+
+
 
 
 
