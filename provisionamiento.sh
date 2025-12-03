@@ -5,8 +5,8 @@ set -e
 echo ">>> Actualizando paquetes"
 apt-get update -y
 
-echo ">>> Instalando Nginx y UFW"
-apt-get install -y nginx ufw
+echo ">>> Instalando Nginx"
+apt-get install -y nginx
 
 echo ">>> Creando estructura del sitio"
 mkdir -p /var/www/jose-nico.test/html/static-website-example
@@ -33,12 +33,6 @@ EOF
 echo ">>> Activando sitio en Nginx"
 ln -sf /etc/nginx/sites-available/jose-nico.test /etc/nginx/sites-enabled/jose-nico.test
 rm -f /etc/nginx/sites-enabled/default
-
-echo ">>> Configurando firewall UFW"
-
-ufw allow ssh
-ufw allow 'Nginx HTTP'
-ufw --force enable
 
 echo ">>> Probando configuración"
 nginx -t
