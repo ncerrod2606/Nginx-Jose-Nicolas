@@ -1,1 +1,0 @@
-{"virtualbox":{"/var/www/jose-nico.test/html/static-website-example":{"guestpath":"/var/www/jose-nico.test/html/static-website-example","hostpath":"C:/Users/2DAW-A/Downloads/perfect-html-education/html","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/Users/2DAW-A/Desktop/nginxIII/Nginx-Jose-Nicolas","disabled":false,"__vagrantfile":true}}}
