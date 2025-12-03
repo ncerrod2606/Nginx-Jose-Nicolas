@@ -1,4 +1,4 @@
-# Nginx II: Autenticación
+# Nginx III: Acceso seguro con Nginx
 
 Realizado por José Manuel Aranda Castro y Nicolás Cervera Rodríguez
 
