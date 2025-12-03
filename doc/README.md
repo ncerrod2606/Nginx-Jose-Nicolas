@@ -90,4 +90,48 @@ Quedando el estado de ufw como el siguiente:
 
 ## Generar un certificado autofirmado
 
+Generaremos un certificado autofirmado con el comando:
+
+```
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/jose-nico.test.key -out /etc/ssl/certs/jose-nico.test.crt
+```
+
+![generar-certificado](./img/cp6.png)
+
+## Configuración
+
+Para configurar el certificado autofirmado, añadiremos la siguiente configuración al archivo de configuración de nginx.
+
+Quedando el archivo de configuración de nginx como el siguiente:
+
+```
+sudo nano /etc/nginx/sites-available/jose-nico.test
+```
+
+Quedando el archivo de configuración de nginx como el siguiente:
+
+![configuracion](./img/cp7.png)
+
+Y cuand probemos la nueva configuración de nginx con el comando:
+
+```
+sudo nginx -t
+```
+
+Y recargaremos nginx con el comando:
+
+```
+sudo systemctl reload nginx
+```
+
+Quedando el estado de la web como el siguiente:
+
+![configuracion](./img/cp8.png)
+
+Y podremos acceder a la web con el siguiente enlace:
+
+![configuracion](./img/cp9.png)
+
+
+
 
